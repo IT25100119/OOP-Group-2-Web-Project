@@ -143,16 +143,3 @@ BikeRentalPlatform/
 - **QuickSort:** `QuickSort.java` — sorts bikes by availability and price
 
 ---
-
-## 🎓 Academic Notes (for Viva)
-
-### File Read/Write Implementation
-- `FileHandler.java` handles ALL file I/O using `BufferedReader` / `BufferedWriter`
-- Each model has `toFileString()` (serialize) and `fromFileString()` (deserialize) methods
-- Data is stored as pipe-delimited (`|`) text — similar to CSV
-
-### Why Spring Boot over raw Servlets?
-Spring Boot is built on top of the Servlet specification — `@Controller` maps to Servlet-like request handling. `HttpSession` is used for session management, exactly as in raw JSP/Servlet.
-
----
-*Built for SE1020 — Object Oriented Programming | Faculty of Computing, 2025*
