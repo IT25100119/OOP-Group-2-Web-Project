@@ -1,17 +1,16 @@
-# VeloRide — Bike Fleet Management
-# Member3_BikeFleet | Git branch: feature/bike-fleet
+# VeloRide — User Management
+# Member1_UserManagement | Git branch: feature/user-management
 
 ## Your files (only edit these):
-  src/main/java/com/bikerental/model/Bike.java
-  src/main/java/com/bikerental/model/ElectricBike.java
-  src/main/java/com/bikerental/model/StandardBike.java
-  src/main/java/com/bikerental/model/MotoBike.java
-  src/main/java/com/bikerental/service/BikeService.java
-  src/main/java/com/bikerental/controller/BikeController.java
-  src/main/java/com/bikerental/util/QuickSort.java
-  src/main/webapp/WEB-INF/views/bikes/list.jsp
-  src/main/webapp/WEB-INF/views/bikes/add.jsp
-  src/main/webapp/WEB-INF/views/bikes/edit.jsp
+  src/main/java/com/bikerental/model/User.java
+  src/main/java/com/bikerental/service/UserService.java
+  src/main/java/com/bikerental/controller/UserController.java
+  src/main/java/com/bikerental/controller/HomeController.java
+  src/main/webapp/WEB-INF/views/index.jsp
+  src/main/webapp/WEB-INF/views/login.jsp
+  src/main/webapp/WEB-INF/views/register.jsp
+  src/main/webapp/WEB-INF/views/user/dashboard.jsp
+  src/main/webapp/WEB-INF/views/user/profile.jsp
 
 ## Common files (do NOT edit — shared infrastructure):
   pom.xml
@@ -30,12 +29,12 @@
 ## Git setup (after cloning the repo from Leader):
   git clone https://github.com/LEADER_USERNAME/BikeRentalPlatform.git
   cd BikeRentalPlatform
-  git checkout -b feature/bike-fleet
+  git checkout -b feature/user-management
 
 ## Daily commit & push:
   git add .
   git commit -m "Your description of what you did"
-  git push origin feature/bike-fleet
+  git push origin feature/user-management
 
 ## Demo credentials:
   Rider: john_doe / password123
