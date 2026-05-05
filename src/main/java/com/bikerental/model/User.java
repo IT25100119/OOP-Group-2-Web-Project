@@ -33,14 +33,30 @@ public class User {
 
     // ─── Getters ────────────────────────────────────────────────────────────────
 
-    public String getUserId()        { return userId; }
-    public String getUsername()      { return username; }
-    public String getEmail()         { return email; }
-    public String getPassword()      { return password; }
-    public String getPhone()         { return phone; }
-    public String getPaymentMethod() { return paymentMethod; }
-    public String getRole()          { return role; }
-    public String getCreatedDate()   { return createdDate; }
+    public String getUserId(){ 
+        return userId;
+    }
+    public String getUsername(){
+        return username;
+    }
+    public String getEmail(){
+        return email; 
+    }
+    public String getPassword(){ 
+        return password;
+    }
+    public String getPhone(){ 
+        return phone; 
+    }
+    public String getPaymentMethod() { 
+        return paymentMethod; 
+    }
+    public String getRole(){ 
+        return role; 
+    }
+    public String getCreatedDate(){ 
+        return createdDate;
+    }
 
     // ─── Setters ────────────────────────────────────────────────────────────────
 
