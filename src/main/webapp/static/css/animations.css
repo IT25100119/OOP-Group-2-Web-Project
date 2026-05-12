@@ -1,0 +1,646 @@
+/* ============================================================
+   VeloRide — Animations & Motion Design
+   ============================================================ */
+
+/* ── Keyframe Library ────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-28px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(28px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+}
+@keyframes scaleInBounce {
+    0%   { opacity: 0; transform: scale(0.6); }
+    70%  { transform: scale(1.05); }
+    100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Continuous Animations ───────────────────────────────────── */
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33%       { transform: translateY(-14px) rotate(1deg); }
+    66%       { transform: translateY(-7px) rotate(-1deg); }
+}
+@keyframes floatSlow {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-20px); }
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+@keyframes spinSlow {
+    to { transform: rotate(360deg); }
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.6; transform: scale(0.97); }
+}
+@keyframes pulseDot {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(0,229,160,0.6); }
+    70%       { box-shadow: 0 0 0 8px rgba(0,229,160,0); }
+}
+@keyframes breathe {
+    0%, 100% { box-shadow: 0 0 8px rgba(0,229,160,0.2); }
+    50%       { box-shadow: 0 0 28px rgba(0,229,160,0.55); }
+}
+@keyframes trailBike {
+    0%   { transform: translateX(-120px); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateX(calc(100vw + 120px)); opacity: 0; }
+}
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+}
+@keyframes orbit {
+    from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+}
+@keyframes orbitReverse {
+    from { transform: rotate(0deg) translateX(90px) rotate(0deg); }
+    to   { transform: rotate(-360deg) translateX(90px) rotate(360deg); }
+}
+@keyframes dash {
+    to { stroke-dashoffset: 0; }
+}
+@keyframes morphBg {
+    0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+@keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes typewriter {
+    from { width: 0; }
+    to   { width: 100%; }
+}
+@keyframes blink {
+    50% { opacity: 0; }
+}
+@keyframes countUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes rippleOut {
+    to { transform: scale(4); opacity: 0; }
+}
+@keyframes glitch1 {
+    0%   { clip-path: inset(20% 0 60% 0); transform: translate(-4px, 0); }
+    20%  { clip-path: inset(60% 0 10% 0); transform: translate(4px, 0); }
+    40%  { clip-path: inset(10% 0 80% 0); transform: translate(0, 0); }
+    60%  { clip-path: inset(40% 0 40% 0); transform: translate(-4px, 0); }
+    80%  { clip-path: inset(80% 0 5%  0); transform: translate(4px, 0); }
+    100% { clip-path: inset(20% 0 60% 0); transform: translate(0, 0); }
+}
+@keyframes glitch2 {
+    0%   { clip-path: inset(50% 0 30% 0); transform: translate(4px, 0); }
+    33%  { clip-path: inset(10% 0 70% 0); transform: translate(-4px, 0); }
+    66%  { clip-path: inset(70% 0 10% 0); transform: translate(2px, 0); }
+    100% { clip-path: inset(50% 0 30% 0); transform: translate(-2px, 0); }
+}
+@keyframes scanline {
+    0%   { top: -10%; }
+    100% { top: 110%; }
+}
+@keyframes neonFlicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 0 0 4px var(--accent), 0 0 16px var(--accent), 0 0 32px var(--accent);
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0) rotateX(0deg); }
+    50%       { transform: translateY(-6px) rotateX(1deg); }
+}
+@keyframes borderGlow {
+    0%, 100% { border-color: rgba(0,229,160,0.15); }
+    50%       { border-color: rgba(0,229,160,0.5); }
+}
+
+/* ── Page-Enter Transition ───────────────────────────────────── */
+.page-wrapper {
+    animation: fadeIn 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.page-wrapper.slide-in {
+    animation: fadeInUp 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── Stagger Animation Helpers ───────────────────────────────── */
+.stagger > * {
+    opacity: 0;
+    animation: fadeInUp 0.5s cubic-bezier(0.4,0,0.2,1) both;
+}
+.stagger > *:nth-child(1)  { animation-delay: 0.05s; }
+.stagger > *:nth-child(2)  { animation-delay: 0.10s; }
+.stagger > *:nth-child(3)  { animation-delay: 0.15s; }
+.stagger > *:nth-child(4)  { animation-delay: 0.20s; }
+.stagger > *:nth-child(5)  { animation-delay: 0.25s; }
+.stagger > *:nth-child(6)  { animation-delay: 0.30s; }
+.stagger > *:nth-child(7)  { animation-delay: 0.35s; }
+.stagger > *:nth-child(8)  { animation-delay: 0.40s; }
+
+/* ── Floating Elements ───────────────────────────────────────── */
+.float-1 { animation: float 6s ease-in-out infinite; }
+.float-2 { animation: float 8s ease-in-out infinite 1s; }
+.float-3 { animation: float 7s ease-in-out infinite 2s; }
+.float-slow { animation: floatSlow 10s ease-in-out infinite; }
+
+/* ── Hero Animated Blob ──────────────────────────────────────── */
+.hero-blob {
+    position: absolute;
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: morphBg 10s ease-in-out infinite;
+    filter: blur(60px);
+    pointer-events: none;
+}
+.hero-blob-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,229,160,0.12), transparent 70%);
+    top: -100px; right: -100px;
+    animation-duration: 12s;
+}
+.hero-blob-2 {
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(78,168,222,0.08), transparent 70%);
+    bottom: 0; left: 10%;
+    animation-duration: 15s;
+    animation-delay: -5s;
+}
+
+/* ── Animated Gradient Text ──────────────────────────────────── */
+.gradient-text { font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), #4ea8de, var(--accent), var(--orange));
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 4s ease infinite;
+}
+
+/* ── Neon Glow Text ──────────────────────────────────────────── */
+.neon-text {
+    color: var(--accent);
+    animation: neonFlicker 5s infinite;
+}
+
+/* ── Typewriter ──────────────────────────────────────────────── */
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid var(--accent);
+    white-space: nowrap;
+    animation: typewriter 2s steps(40) 0.5s both,
+    blink 0.75s step-end infinite 2.5s;
+}
+
+/* ── Bike Trail (Right to Left, No Flip) ─────────────────────── */
+.bike-trail {
+    position: fixed;
+    bottom: 80px;
+    right: -50px; /* Start off-screen on the right */
+    font-size: 1.8rem;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    animation: trailBike 12s linear infinite;
+    filter: drop-shadow(0 0 8px rgba(0,229,160,0.6));
+    /* transform: scaleX(-1);  <-- REMOVED so the bike doesn't turn */
+}
+
+.bike-trail::after {
+    content: '';
+    position: absolute;
+    /* If your bike faces LEFT, the trail must be on its RIGHT */
+    left: 100%;
+    top: 50%;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(to right, rgba(0,229,160,0.5), transparent);
+    transform: translateY(-50%);
+}
+
+@keyframes trailBike {
+    0% {
+        right: -50px;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        right: 110vw; /* Move all the way to the left */
+        opacity: 0;
+    }
+}
+/* ── Particle Canvas ─────────────────────────────────────────── */
+#particleCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+/* ── Hover: Magnetic Button Effect ──────────────────────────── */
+.btn-magnetic {
+    transition: transform 0.2s cubic-bezier(0.4,0,0.2,1),
+    box-shadow 0.2s ease;
+    will-change: transform;
+}
+
+/* ── Card Hover Lift ─────────────────────────────────────────── */
+.card-hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.card-hover-lift:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(0,229,160,0.1);
+    border-color: rgba(0,229,160,0.3);
+}
+
+/* ── Tilt Card ───────────────────────────────────────────────── */
+.tilt-card {
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+}
+.tilt-card-inner {
+    transform: translateZ(20px);
+}
+
+/* ── Glow on hover ───────────────────────────────────────────── */
+.glow-hover {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.glow-hover:hover {
+    box-shadow: 0 0 20px rgba(0,229,160,0.3), 0 0 60px rgba(0,229,160,0.1);
+    border-color: rgba(0,229,160,0.4);
+}
+
+/* ── Animated border ─────────────────────────────────────────── */
+.animated-border {
+    position: relative;
+}
+.animated-border::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent) 25%,
+    transparent 50%,
+    var(--accent) 75%,
+    transparent 100%
+    );
+    background-size: 300% 100%;
+    animation: shimmer 2.5s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ── Progress bar animated ───────────────────────────────────── */
+.progress-bar {
+    height: 4px;
+    background: var(--bg-700);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--blue));
+    border-radius: 2px;
+    animation: shimmer 2s linear infinite;
+    background-size: 200% 100%;
+    transition: width 1s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── Loading spinner ─────────────────────────────────────────── */
+.spinner {
+    width: 36px; height: 36px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+.spinner-sm {
+    width: 18px; height: 18px;
+    border-width: 2px;
+}
+
+/* ── Orbit decoration ────────────────────────────────────────── */
+.orbit-system {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.orbit-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0,229,160,0.2);
+}
+.orbit-dot {
+    position: absolute;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+}
+.orbit-dot-1 { animation: orbit 4s linear infinite; }
+.orbit-dot-2 { animation: orbitReverse 7s linear infinite; background: var(--blue); box-shadow: 0 0 10px var(--blue); }
+
+/* ── Glitch effect ───────────────────────────────────────────── */
+.glitch {
+    position: relative;
+}
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    font: inherit;
+    color: inherit;
+}
+.glitch::before {
+    color: var(--accent);
+    animation: glitch1 3s infinite linear alternate-reverse;
+    opacity: 0.7;
+}
+.glitch::after {
+    color: var(--blue);
+    animation: glitch2 2.5s infinite linear alternate-reverse;
+    opacity: 0.7;
+}
+.glitch:hover::before,
+.glitch:hover::after {
+    animation-duration: 0.3s;
+}
+
+/* ── Number Flip ─────────────────────────────────────────────── */
+.number-flip {
+    overflow: hidden;
+    height: 1.2em;
+    display: inline-block;
+}
+.number-flip-inner {
+    animation: countUp 0.5s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+/* ── Animated underline on links ─────────────────────────────── */
+.underline-anim {
+    position: relative;
+    display: inline-block;
+}
+.underline-anim::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.underline-anim:hover::after { width: 100%; }
+
+/* ── Slide-in rows for tables ────────────────────────────────── */
+tbody tr {
+    animation: fadeInLeft 0.35s ease both;
+}
+tbody tr:nth-child(1)  { animation-delay: 0.02s; }
+tbody tr:nth-child(2)  { animation-delay: 0.04s; }
+tbody tr:nth-child(3)  { animation-delay: 0.06s; }
+tbody tr:nth-child(4)  { animation-delay: 0.08s; }
+tbody tr:nth-child(5)  { animation-delay: 0.10s; }
+tbody tr:nth-child(6)  { animation-delay: 0.12s; }
+tbody tr:nth-child(7)  { animation-delay: 0.14s; }
+tbody tr:nth-child(8)  { animation-delay: 0.16s; }
+tbody tr:nth-child(n+9){ animation-delay: 0.18s; }
+
+/* ── Alert entrance ──────────────────────────────────────────── */
+.alert { animation: slideDown 0.35s cubic-bezier(0.4,0,0.2,1) both; }
+
+/* ── Nav entrance ────────────────────────────────────────────── */
+.navbar { animation: fadeInDown 0.4s cubic-bezier(0.4,0,0.2,1) both; }
+
+/* ── Hover scan line on cards ────────────────────────────────── */
+.card-scan {
+    position: relative;
+    overflow: hidden;
+}
+.card-scan::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(transparent, rgba(0,229,160,0.04), transparent);
+    transition: none;
+    pointer-events: none;
+}
+.card-scan:hover::after {
+    animation: scanline 0.8s linear;
+}
+
+/* ── Badge pulse ─────────────────────────────────────────────── */
+.badge-available {
+    animation: breathe 2.5s ease-in-out infinite;
+}
+
+/* ── Live dot ────────────────────────────────────────────────── */
+.live-dot {
+    animation: pulseDot 1.5s ease-out infinite;
+}
+
+/* ── Skeleton shimmer ────────────────────────────────────────── */
+.skeleton {
+    background: linear-gradient(90deg,
+    var(--bg-700) 25%, var(--bg-600) 50%, var(--bg-700) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* ── SVG path draw ───────────────────────────────────────────── */
+.svg-draw {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 2s ease forwards;
+}
+
+/* ── Stats card entrance ─────────────────────────────────────── */
+.card-stat {
+    animation: scaleIn 0.4s cubic-bezier(0.4,0,0.2,1) both;
+}
+.stats-grid .card-stat:nth-child(1) { animation-delay: 0.05s; }
+.stats-grid .card-stat:nth-child(2) { animation-delay: 0.10s; }
+.stats-grid .card-stat:nth-child(3) { animation-delay: 0.15s; }
+.stats-grid .card-stat:nth-child(4) { animation-delay: 0.20s; }
+.stats-grid .card-stat:nth-child(5) { animation-delay: 0.25s; }
+.stats-grid .card-stat:nth-child(6) { animation-delay: 0.30s; }
+.stats-grid .card-stat:nth-child(7) { animation-delay: 0.35s; }
+
+/* ── Bike card ───────────────────────────────────────────────── */
+.bike-card {
+    animation: fadeInUp 0.45s cubic-bezier(0.4,0,0.2,1) both;
+}
+.bikes-grid .bike-card:nth-child(1) { animation-delay: 0.04s; }
+.bikes-grid .bike-card:nth-child(2) { animation-delay: 0.08s; }
+.bikes-grid .bike-card:nth-child(3) { animation-delay: 0.12s; }
+.bikes-grid .bike-card:nth-child(4) { animation-delay: 0.16s; }
+.bikes-grid .bike-card:nth-child(5) { animation-delay: 0.20s; }
+.bikes-grid .bike-card:nth-child(6) { animation-delay: 0.24s; }
+
+/* ── Button press effect ─────────────────────────────────────── */
+.btn {
+    transition: transform 0.15s cubic-bezier(0.4,0,0.2,1),
+    box-shadow 0.15s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+.btn:active { transform: scale(0.94) !important; }
+
+/* ── Input focus animation ───────────────────────────────────── */
+.form-control {
+    transition: border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+/* ── Modal-like card entrance ────────────────────────────────── */
+.auth-card {
+    animation: scaleInBounce 0.5s cubic-bezier(0.4,0,0.2,1) both;
+}
+
+/* ── Feature icons spin on hover ─────────────────────────────── */
+.feature-icon {
+    display: inline-block;
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.card:hover .feature-icon {
+    transform: rotate(15deg) scale(1.2);
+}
+
+/* ── Gradient border card ────────────────────────────────────── */
+.card-gradient-border {
+    position: relative;
+    background: var(--bg-card);
+    border: none !important;
+}
+.card-gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: calc(var(--radius) + 1px);
+    background: linear-gradient(135deg,
+    rgba(0,229,160,0.4),
+    transparent 40%,
+    transparent 60%,
+    rgba(78,168,222,0.3));
+    z-index: -1;
+}
+
+/* ── Text reveal wipe ────────────────────────────────────────── */
+.text-reveal {
+    position: relative;
+    overflow: hidden;
+}
+.text-reveal::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform-origin: left;
+    animation: wipeReveal 0.6s cubic-bezier(0.77,0,0.18,1) both;
+}
+@keyframes wipeReveal {
+    0%   { transform: scaleX(0); transform-origin: left; }
+    50%  { transform: scaleX(1); transform-origin: left; }
+    50.01%{ transform-origin: right; }
+    100% { transform: scaleX(0); transform-origin: right; }
+}
+
+/* ── Road dashes decoration ──────────────────────────────────── */
+.road-dashes {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.road-dash {
+    height: 3px;
+    border-radius: 2px;
+    background: var(--accent);
+    animation: expandDash 0.4s cubic-bezier(0.4,0,0.2,1) both;
+}
+@keyframes expandDash {
+    from { width: 0; opacity: 0; }
+    to   { width: var(--w, 20px); opacity: 1; }
+}
+.road-dash:nth-child(1) { animation-delay: 0.0s; --w: 40px; }
+.road-dash:nth-child(2) { animation-delay: 0.1s; --w: 16px; }
+.road-dash:nth-child(3) { animation-delay: 0.2s; --w: 24px; }
+.road-dash:nth-child(4) { animation-delay: 0.3s; --w: 16px; }
+
+/* ── Scroll progress bar ─────────────────────────────────────── */
+#scrollProgress {
+    position: fixed;
+    top: 64px; left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--blue));
+    width: 0%;
+    z-index: 999;
+    transition: width 0.05s linear;
+    box-shadow: 0 0 8px rgba(0,229,160,0.5);
+}
+
+/* ── Cursor glow ─────────────────────────────────────────────── */
+#cursorGlow {
+    position: fixed;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+    rgba(0,229,160,0.04) 0%,
+    transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+}
