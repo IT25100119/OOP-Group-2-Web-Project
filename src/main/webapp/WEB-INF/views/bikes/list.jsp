@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -205,7 +206,7 @@
       to  { opacity:1; transform:translateY(0)     scale(1); }
     }
     @keyframes wheelSpin {
-      to{ transform:rotate(-360deg); }  /* counterclockwise = forward motion */
+      to{ transform:rotate(360deg); }
     }
     @keyframes speedLine {
       from{ transform:scaleX(0); opacity:0; }
@@ -521,7 +522,7 @@
 
             <%-- Price pill --%>
             <div class="price-pill">
-              $${bike.pricePerHour}<span style="font-size:.62rem; font-family:var(--font-body); opacity:.7;">/hr</span>
+              ₨<fmt:formatNumber value="${bike.pricePerHour * 320.34}" pattern="#,##0"/><span style="font-size:.62rem; font-family:var(--font-body); opacity:.7;">/hr</span>
             </div>
 
           </div><%-- /bike-scene --%>
@@ -578,6 +579,27 @@
               </c:otherwise>
             </c:choose>
 
+            <%-- Rental Packages --%>
+            <c:set var="bikePkgs" value="${packagesByBike[bike.bikeId]}"/>
+            <c:if test="${not empty bikePkgs}">
+            <div style="margin-bottom:.85rem;">
+              <div style="font-size:.68rem; color:var(--text-400); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.35rem;">
+                <i class="bi bi-tags"></i> Packages
+              </div>
+              <div style="display:flex; flex-wrap:wrap; gap:.3rem;">
+                <c:forEach var="pkg" items="${bikePkgs}">
+                <span style="font-size:.72rem; padding:.2rem .55rem; border-radius:99px;
+                  background:${pkg.type=='HOUR'?'rgba(0,229,160,.1)':'rgba(78,168,222,.1)'};
+                  color:${pkg.type=='HOUR'?'var(--accent)':'var(--blue)'};
+                  border:1px solid ${pkg.type=='HOUR'?'rgba(0,229,160,.3)':'rgba(78,168,222,.3)'};
+                  white-space:nowrap;">
+                  ${pkg.duration}${pkg.type=='HOUR'?'h':'d'} — ₨<fmt:formatNumber value="${pkg.price * 320.34}" pattern="#,##0"/>
+                </span>
+                </c:forEach>
+              </div>
+            </div>
+            </c:if>
+
             <%-- Station --%>
             <div class="text-muted" style="font-size:.78rem; margin-bottom:1rem; display:flex; align-items:center; gap:5px;">
               <i class="bi bi-geo-alt-fill" style="color:${bike.type=='ELECTRIC'?'var(--accent)':'var(--blue)'};"></i>
@@ -627,7 +649,7 @@
 </div>
 </div>
 
-<footer class="footer"><p>© 2025 VeloRide — Bike Rental Platform</p></footer>
+<footer class="footer"><p>© 2026 VeloRide — Bike Rental Platform</p></footer>
 <script src="/static/js/main.js"></script>
 <script src="/static/js/animations.js"></script>
 <script>

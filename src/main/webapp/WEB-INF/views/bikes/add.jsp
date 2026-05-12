@@ -114,8 +114,8 @@
             </select></div>
         </div>
         <div class="two-col" style="gap:1rem;">
-          <div class="form-group"><label class="form-label">Price / Hour ($) *</label>
-            <input type="number" name="price" class="form-control" required step="0.25" min="0.5" placeholder="3.50"/></div>
+          <div class="form-group"><label class="form-label">Price / Hour (₨) *</label>
+            <input type="number" name="price" class="form-control price-lkr-add" required step="1" min="100" placeholder="1,120"/></div>
           <div class="form-group"><label class="form-label">Battery Level (%)</label>
             <input type="number" name="battery" class="form-control" value="100" min="0" max="100"/></div>
         </div>
@@ -147,8 +147,8 @@
             </select></div>
         </div>
         <div class="two-col" style="gap:1rem;">
-          <div class="form-group"><label class="form-label">Price / Hour ($) *</label>
-            <input type="number" name="price" class="form-control" required step="0.25" min="0.5" placeholder="1.50"/></div>
+          <div class="form-group"><label class="form-label">Price / Hour (₨) *</label>
+            <input type="number" name="price" class="form-control price-lkr-add" required step="1" min="100" placeholder="480"/></div>
           <div class="form-group"><label class="form-label">Gear Count</label>
             <input type="number" name="gears" class="form-control" value="21" min="1" max="30"/></div>
         </div>
@@ -187,8 +187,8 @@
             </select></div>
         </div>
         <div class="two-col" style="gap:1rem;">
-          <div class="form-group"><label class="form-label">Base Price / Hour ($) *</label>
-            <input type="number" name="price" class="form-control" required step="0.50" min="1.00" placeholder="5.00"/></div>
+          <div class="form-group"><label class="form-label">Base Price / Hour (₨) *</label>
+            <input type="number" name="price" class="form-control price-lkr-add" required step="1" min="100" placeholder="1,600"/></div>
           <div class="form-group"><label class="form-label">Engine (cc) *</label>
             <input type="number" name="engineCC" class="form-control" required min="50" max="1000" placeholder="125"/></div>
         </div>
@@ -229,7 +229,7 @@
   <div class="mt-3"><a href="/bikes" class="btn btn-ghost"><i class="bi bi-arrow-left"></i> Back to Fleet</a></div>
 </div>
 </div>
-<footer class="footer"><p>© 2025 VeloRide — Admin</p></footer>
+<footer class="footer"><p>© 2026 VeloRide — Admin</p></footer>
 <script src="/static/js/main.js"></script>
 <script src="/static/js/animations.js"></script>
 <script>
@@ -242,6 +242,18 @@
     document.getElementById('btn-'+type).classList.add('active');
     document.getElementById('form-'+type).classList.add('show');
   }
+</script>
+
+<script>
+  const ADD_RATE = 320.34;
+  document.querySelectorAll('form').forEach(function(form) {
+    form.addEventListener('submit', function() {
+      var inp = form.querySelector('.price-lkr-add');
+      if (inp) {
+        inp.value = (parseFloat(inp.value) / ADD_RATE).toFixed(4);
+      }
+    });
+  });
 </script>
 </body>
 </html>

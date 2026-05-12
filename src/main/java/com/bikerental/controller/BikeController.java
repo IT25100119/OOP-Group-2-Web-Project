@@ -1,9 +1,7 @@
 package com.bikerental.controller;
 
-import com.bikerental.model.MotoBike;
-import com.bikerental.model.StandardBike;
-import com.bikerental.model.ElectricBike;
 import com.bikerental.model.Bike;
+import com.bikerental.service.BikePackageService;
 import com.bikerental.model.AdminUser;
 import com.bikerental.service.BikeService;
 import com.bikerental.service.StationService;
@@ -21,8 +19,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/bikes")
 public class BikeController {
 
-    @Autowired private BikeService    bikeService;
-    @Autowired private StationService stationService;
+    @Autowired private BikeService       bikeService;
+    @Autowired private StationService    stationService;
+    @Autowired private BikePackageService packageService;
 
     // ─── READ: Public bike list ───────────────────────────────────────────────────
 
@@ -40,8 +39,14 @@ public class BikeController {
         } else {
             model.addAttribute("bikes", bikeService.getAllBikesSortedByAvailability());
         }
-        model.addAttribute("stations", stationService.getAllStations());
-        model.addAttribute("sessionUser", session.getAttribute("loggedUser"));
+        model.addAttribute("stations",   stationService.getAllStations());
+        // Group packages by bikeId for the list view
+        java.util.Map<String, java.util.List<com.bikerental.model.RentalPackage>> pkgMap = new java.util.HashMap<>();
+        for (com.bikerental.model.RentalPackage pkg : packageService.getAllPackages()) {
+            pkgMap.computeIfAbsent(pkg.getBikeId(), k -> new java.util.ArrayList<>()).add(pkg);
+        }
+        model.addAttribute("packagesByBike", pkgMap);
+        model.addAttribute("sessionUser",  session.getAttribute("loggedUser"));
         model.addAttribute("sessionAdmin", session.getAttribute("loggedAdmin"));
         return "bikes/list";
     }
@@ -125,6 +130,8 @@ public class BikeController {
             model.addAttribute("sBike", (com.bikerental.model.StandardBike) bike);
         else if (bike instanceof com.bikerental.model.MotoBike)
             model.addAttribute("mBike", (com.bikerental.model.MotoBike) bike);
+        model.addAttribute("hourPackages", packageService.getHourPackagesForBike(bikeId));
+        model.addAttribute("dayPackages",  packageService.getDayPackagesForBike(bikeId));
         return "bikes/edit";
     }
 
@@ -199,9 +206,12 @@ public class BikeController {
     // ─── ADMIN: Delete Bike ──────────────────────────────────────────────────────
 
     @PostMapping("/delete")
-    public String deleteBike(@RequestParam String bikeId, HttpSession session) {
+    public String deleteBike(@RequestParam String bikeId,
+                             @RequestParam(required = false, defaultValue = "/bikes") String redirectTo,
+                             HttpSession session) {
         if (session.getAttribute("loggedAdmin") == null) return "redirect:/login";
         bikeService.deleteBike(bikeId);
-        return "redirect:/bikes";
+        packageService.deleteAllPackagesForBike(bikeId);
+        return "redirect:" + redirectTo;
     }
 }

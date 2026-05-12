@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -125,6 +126,14 @@
 </nav>
 
 <div class="page-wrapper">
+<div style="padding:.75rem 0 0;">
+    <a href="/" class="btn btn-ghost btn-sm" style="font-size:.8rem;">
+      <i class="bi bi-arrow-left"></i> Back to Dashboard
+    </a>
+    <a href="/bikes" class="btn btn-ghost btn-sm" style="font-size:.8rem; margin-left:.25rem;">
+      <i class="bi bi-bicycle"></i> Bike Fleet List
+    </a>
+  </div>
 <div class="container" style="padding-top:2rem; padding-bottom:4rem; max-width:960px;">
 
   <%-- ── Header ─────────────────────────────────────────── --%>
@@ -320,9 +329,10 @@
             </div>
             <div class="two-col" style="gap:1rem;">
               <div class="form-group">
-                <label class="form-label">Price / Hour ($) *</label>
-                <input type="number" name="price" class="form-control" required
-                       step="0.25" min="0.5" value="${bike.pricePerHour}"/>
+                <label class="form-label">Price / Hour (₨) *</label>
+                <input type="number" name="price" id="priceInputE" class="form-control price-lkr-input" required
+                       step="1" min="100" value="${bike.pricePerHour * 320.34}"
+                       data-usd="${bike.pricePerHour}"/>
               </div>
               <div class="form-group">
                 <label class="form-label">Station *</label>
@@ -369,10 +379,7 @@
               <i class="bi bi-check-circle-fill"></i> Save Changes
             </button>
             <a href="/bikes" class="btn btn-ghost">Cancel</a>
-            <form action="/bikes/delete" method="post" style="display:inline;" onsubmit="return confirm('Delete this bike? This cannot be undone.')">
-              <input type="hidden" name="bikeId" value="${bike.bikeId}"/>
-              <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-            </form>
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()"><i class="bi bi-trash"></i></button>
           </div>
         </form>
       </c:if>
@@ -392,9 +399,10 @@
             </div>
             <div class="two-col" style="gap:1rem;">
               <div class="form-group">
-                <label class="form-label">Price / Hour ($) *</label>
-                <input type="number" name="price" class="form-control" required
-                       step="0.25" min="0.5" value="${bike.pricePerHour}"/>
+                <label class="form-label">Price / Hour (₨) *</label>
+                <input type="number" name="price" id="priceInputS" class="form-control price-lkr-input" required
+                       step="1" min="100" value="${bike.pricePerHour * 320.34}"
+                       data-usd="${bike.pricePerHour}"/>
               </div>
               <div class="form-group">
                 <label class="form-label">Station *</label>
@@ -440,10 +448,7 @@
               <i class="bi bi-check-circle-fill"></i> Save Changes
             </button>
             <a href="/bikes" class="btn btn-ghost">Cancel</a>
-            <form action="/bikes/delete" method="post" style="display:inline;" onsubmit="return confirm('Delete this bike?')">
-              <input type="hidden" name="bikeId" value="${bike.bikeId}"/>
-              <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-            </form>
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()"><i class="bi bi-trash"></i></button>
           </div>
         </form>
       </c:if>
@@ -463,9 +468,10 @@
             </div>
             <div class="two-col" style="gap:1rem;">
               <div class="form-group">
-                <label class="form-label">Base Price / Hour ($) *</label>
-                <input type="number" name="price" class="form-control" required
-                       step="0.50" min="1.0" value="${bike.pricePerHour}"/>
+                <label class="form-label">Base Price / Hour (₨) *</label>
+                <input type="number" name="price" id="priceInputM" class="form-control price-lkr-input" required
+                       step="1" min="100" value="${bike.pricePerHour * 320.34}"
+                       data-usd="${bike.pricePerHour}"/>
               </div>
               <div class="form-group">
                 <label class="form-label">Station *</label>
@@ -527,10 +533,7 @@
               <i class="bi bi-check-circle-fill"></i> Save Changes
             </button>
             <a href="/bikes" class="btn btn-ghost">Cancel</a>
-            <form action="/bikes/delete" method="post" style="display:inline;" onsubmit="return confirm('Delete this bike?')">
-              <input type="hidden" name="bikeId" value="${bike.bikeId}"/>
-              <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
-            </form>
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()"><i class="bi bi-trash"></i></button>
           </div>
         </form>
       </c:if>
@@ -568,16 +571,177 @@
         </div>
       </div>
 
+
+      <%-- ── Rental Packages ──────────────────────────── --%>
+      <div class="card animate-in-4" style="margin-top:1.5rem;" id="packagesCard">
+        <div class="d-flex justify-between align-center mb-3">
+          <h4 style="font-size:.95rem;"><i class="bi bi-tags-fill text-accent"></i> Rental Packages</h4>
+          <span class="badge" style="font-size:.68rem; background:rgba(0,229,160,.12); color:var(--accent); border-color:rgba(0,229,160,.3);">Admin Editable</span>
+        </div>
+
+        <form action="/bikes/packages/save" method="post" id="pkgForm">
+          <input type="hidden" name="bikeId" value="${bike.bikeId}"/>
+
+          <%-- Hour Packages --%>
+          <div style="margin-bottom:1.25rem;">
+            <div class="d-flex justify-between align-center" style="margin-bottom:.6rem;">
+              <span style="font-size:.8rem; font-weight:500; color:var(--text-300); text-transform:uppercase; letter-spacing:.06em;">
+                <i class="bi bi-clock"></i> Hour Packages
+              </span>
+              <button type="button" class="btn btn-ghost btn-sm" style="font-size:.75rem; padding:.2rem .6rem;" onclick="addRow('HOUR')">
+                <i class="bi bi-plus-circle"></i> Add
+              </button>
+            </div>
+            <div id="hourRows">
+              <c:forEach var="pkg" items="${hourPackages}">
+              <div class="pkg-row" data-id="${pkg.packageId}">
+                <input type="hidden" name="pkgType" value="HOUR"/>
+                <div style="display:grid; grid-template-columns:80px 1fr auto; gap:.5rem; align-items:center; margin-bottom:.45rem;">
+                  <div>
+                    <label style="font-size:.7rem; color:var(--text-500); display:block;">Hours</label>
+                    <input type="number" name="pkgDuration" value="${pkg.duration}"
+                           min="1" max="23" step="1" required
+                           style="width:100%; padding:.3rem .5rem; font-size:.85rem;"/>
+                  </div>
+                  <div>
+                    <label style="font-size:.7rem; color:var(--text-500); display:block;">Price (₨)</label>
+                    <input type="number" name="pkgPrice" value="${pkg.price * 320.34}"
+                           min="0" step="1" required
+                           style="width:100%; padding:.3rem .5rem; font-size:.85rem;"
+                           data-usd="${pkg.price}" class="lkr-price-input"/>
+                  </div>
+                  <button type="button" class="btn btn-danger btn-sm" style="margin-top:1rem; padding:.25rem .55rem; font-size:.8rem;"
+                          onclick="removeRow(this)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+              </c:forEach>
+              <c:if test="${empty hourPackages}">
+              <p class="text-muted" style="font-size:.8rem; text-align:center; padding:.5rem 0;" id="hourEmpty">No hour packages yet.</p>
+              </c:if>
+            </div>
+          </div>
+
+          <%-- Day Packages --%>
+          <div style="margin-bottom:1.25rem;">
+            <div class="d-flex justify-between align-center" style="margin-bottom:.6rem;">
+              <span style="font-size:.8rem; font-weight:500; color:var(--text-300); text-transform:uppercase; letter-spacing:.06em;">
+                <i class="bi bi-calendar3"></i> Day Packages
+              </span>
+              <button type="button" class="btn btn-ghost btn-sm" style="font-size:.75rem; padding:.2rem .6rem;" onclick="addRow('DAY')">
+                <i class="bi bi-plus-circle"></i> Add
+              </button>
+            </div>
+            <div id="dayRows">
+              <c:forEach var="pkg" items="${dayPackages}">
+              <div class="pkg-row" data-id="${pkg.packageId}">
+                <input type="hidden" name="pkgType" value="DAY"/>
+                <div style="display:grid; grid-template-columns:80px 1fr auto; gap:.5rem; align-items:center; margin-bottom:.45rem;">
+                  <div>
+                    <label style="font-size:.7rem; color:var(--text-500); display:block;">Days</label>
+                    <input type="number" name="pkgDuration" value="${pkg.duration}"
+                           min="1" max="30" step="1" required
+                           style="width:100%; padding:.3rem .5rem; font-size:.85rem;"/>
+                  </div>
+                  <div>
+                    <label style="font-size:.7rem; color:var(--text-500); display:block;">Price (₨)</label>
+                    <input type="number" name="pkgPrice" value="${pkg.price * 320.34}"
+                           min="0" step="1" required
+                           style="width:100%; padding:.3rem .5rem; font-size:.85rem;"
+                           data-usd="${pkg.price}" class="lkr-price-input"/>
+                  </div>
+                  <button type="button" class="btn btn-danger btn-sm" style="margin-top:1rem; padding:.25rem .55rem; font-size:.8rem;"
+                          onclick="removeRow(this)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+              </c:forEach>
+              <c:if test="${empty dayPackages}">
+              <p class="text-muted" style="font-size:.8rem; text-align:center; padding:.5rem 0;" id="dayEmpty">No day packages yet.</p>
+              </c:if>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100" style="font-size:.88rem;">
+            <i class="bi bi-check-circle"></i> Save Packages
+          </button>
+        </form>
+      </div>
+
     </div><%-- /right col --%>
   </div><%-- /edit-grid --%>
 
 </div>
 </div>
 
-<footer class="footer"><p>© 2025 VeloRide — Admin Panel</p></footer>
+<footer class="footer"><p>© 2026 VeloRide — Admin Panel</p></footer>
 <script src="/static/js/main.js"></script>
 <script src="/static/js/animations.js"></script>
 <script>
+
+  // ── Rental Package rows ──────────────────────────────────────────────────────
+  const RATE = 320.34;
+
+  function addRow(type) {
+    const containerId = type === 'HOUR' ? 'hourRows' : 'dayRows';
+    const maxDur      = type === 'HOUR' ? 23 : 30;
+    const emptyId     = type === 'HOUR' ? 'hourEmpty' : 'dayEmpty';
+    const container   = document.getElementById(containerId);
+
+    // Remove the "No packages" placeholder if present
+    const empty = document.getElementById(emptyId);
+    if (empty) empty.remove();
+
+    const row = document.createElement('div');
+    row.className = 'pkg-row';
+    row.innerHTML =
+      '<input type="hidden" name="pkgType" value="' + type + '"/>' +
+      '<div style="display:grid; grid-template-columns:80px 1fr auto; gap:.5rem; align-items:center; margin-bottom:.45rem;">' +
+        '<div>' +
+          '<label style="font-size:.7rem; color:var(--text-500); display:block;">' + (type === 'HOUR' ? 'Hours' : 'Days') + '</label>' +
+          '<input type="number" name="pkgDuration" value="1" min="1" max="' + maxDur + '" step="1" required' +
+                 ' style="width:100%; padding:.3rem .5rem; font-size:.85rem;"/>' +
+        '</div>' +
+        '<div>' +
+          '<label style="font-size:.7rem; color:var(--text-500); display:block;">Price (&#8360;)</label>' +
+          '<input type="number" name="pkgPrice" value="" placeholder="e.g. 1500"' +
+                 ' min="0" step="1" required' +
+                 ' style="width:100%; padding:.3rem .5rem; font-size:.85rem;" class="lkr-price-input"/>' +
+        '</div>' +
+        '<button type="button" class="btn btn-danger btn-sm"' +
+                ' style="margin-top:1rem; padding:.25rem .55rem; font-size:.8rem;"' +
+                ' onclick="removeRow(this)"><i class="bi bi-trash"></i></button>' +
+      '</div>';
+    container.appendChild(row);
+  }
+
+  function removeRow(btn) {
+    btn.closest('.pkg-row').remove();
+  }
+
+  // Convert LKR input → USD before submitting
+  document.getElementById('pkgForm').addEventListener('submit', function() {
+    document.querySelectorAll('.lkr-price-input').forEach(input => {
+      const lkr = parseFloat(input.value) || 0;
+      input.value = (lkr / RATE).toFixed(4);
+    });
+  });
+
+
+  // ── Price: LKR → USD conversion on submit ───────────────────────────────────
+  const PRICE_RATE = 320.34;
+  document.querySelectorAll('form[action^="/bikes/edit/electric"], form[action^="/bikes/edit/standard"], form[action^="/bikes/edit/moto"]').forEach(function(form) {
+    form.addEventListener('submit', function() {
+      var inp = form.querySelector('.price-lkr-input');
+      if (inp) {
+        var lkr = parseFloat(inp.value) || 0;
+        inp.value = (lkr / PRICE_RATE).toFixed(4);
+      }
+    });
+  });
+
   function setStatus(val, pill) {
     document.querySelectorAll('.status-pill').forEach(p => {
       p.classList.remove('selected');
@@ -586,10 +750,21 @@
     document.getElementById('statusInput').value = val;
   }
 
+  // ── Delete bike (standalone form, outside edit forms) ────────────────────────
+  function confirmDelete() {
+    if (confirm('Delete this bike? This cannot be undone.')) {
+      document.getElementById('deleteBikeForm').submit();
+    }
+  }
+
   // Animate battery slider
   document.querySelectorAll('input[type=range]').forEach(r => {
     r.style.transition = 'accent-color .2s';
   });
 </script>
+<%-- ── Standalone delete form (placed outside all edit forms to avoid nesting) --%>
+<form id="deleteBikeForm" action="/bikes/delete" method="post" style="display:none;">
+  <input type="hidden" name="bikeId" value="${bike.bikeId}"/>
+</form>
 </body>
 </html>

@@ -1,8 +1,5 @@
 package com.bikerental.service;
 
-import com.bikerental.model.Station;
-import com.bikerental.model.User;
-import com.bikerental.model.Bike;
 import com.bikerental.service.StationService;
 import com.bikerental.service.BikeService;
 import org.springframework.beans.factory.annotation.Autowired;
