@@ -1,0 +1,4 @@
+STA-D2C64EB4|City Center Hub|Main Street, Downtown|20|0|OPEN|2026-05-10 09:15|7.2906|80.6337
+STA-7DEB28F4|University Gate|Peradeniya Road, Kandy|15|0|OPEN|2026-05-10 09:15|7.2543|80.5928
+STA-880C7577|Peradeniya Botanical|Botanical Gardens, Peradeniya|10|0|OPEN|2026-05-10 09:15|7.2685|80.5956
+STA-DF6F03FB|Kandy Lake Side|Lake Round, Kandy|12|1|OPEN|2026-05-10 09:15|7.2935|80.6412
